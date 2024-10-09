@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Estudiante</title>
+    <style>
+        @page {
+            margin: 1cm;
+        }
+
+        body {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .title {
+            font-size: 15px;
+            margin-bottom: 27px;
+            color: #4472c4;
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .containerHeader {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .keyTableHead {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .valueTableHead {
+            text-align: center;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+
+        .textObserv {
+            font-size: 12px;
+        }
+
+        .textLogros {
+            text-align: left;
+            font-size: 12px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: solid 1px #010101;
+            padding: 2px 1px;
+            /*border-collapse: collapse;*/
+        }
+
+        .fotoEstudiante {
+            width: 100px;
+            height: 100px;
+            border-radius: 0px 15px 0px 15px;
+            border: 5px solid white;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Añade una sombra */
+        }
+
+        .tableDataHead {
+            background-color: #b8cce4;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .headResult {
+            text-align: center;
+            padding: 2px;
+        }
+
+        .tableDataBody {
+            font-size: 12px;
+        }
+
+        .dataBodyResult {
+            text-align: center;
+        }
+
+        .containerTable {
+            width: 100%;
+        }
+
+        .tableData {
+            width: 100%;
+            border: 2px black solid;
+        }
+
+        .tableData td, .tableData th {
+            border: 2px black solid;
+        }
+
+
+        .tableDataStudent {
+            width: 400px;
+            border: 2px black solid;
+        }
+
+        .tableDataStudent td {
+            border: 2px black solid;
+        }
+
+        .containerLogo {
+            display: flex;
+            width: 100%;
+            position: absolute;
+        }
+
+        .textAvances {
+            font-weight: bold;
+            font-size: 13px;
+            background-color: #b8cce4;
+            border-top: 2px black solid;
+            border-left: 2px black solid;
+            border-right: 2px black solid;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .tableObservaciones {
+            max-width: 100%;
+            width: 100%;
+            table-layout: fixed;
+            /* Esto asegura que las celdas respeten el tamaño de la tabla */
+            word-wrap: break-word;
+            /* Asegura que el texto se ajuste dentro de la celda */
+            word-break: break-all;
+            /* Fuerza que las palabras largas se dividan si es necesario */
+            text-align: center;
+            
+            border-left: 2px black solid;
+            border-right: 2px black solid;
+        }
+
+        .tableObservaciones td {
+            border-bottom   : 2px black solid;
+        }
+
+        
+
+        .observacionTittle {
+            background-color: #b8cce4;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .observacionText {
+            font-size: 12px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="containerLogo">
+            <img src="https://boteritos.org/wp-content/uploads/2018/04/logo.png" alt="Logo de la Fundación"
+                class="logo">
+        </div>
+        <h1 class="title">INFORME DE LOGROS</h1>
+
+        <div class="containerHeader">
+
+            <table class="tableDataStudent">
+                <tr>
+                    <td class="keyTableHead">NOMBRE:</td>
+                    <td class="valueTableHead">{{estudiante.nombre}}</td>
+                </tr>
+                <tr>
+                    <td class="keyTableHead">DOCUMENTO:</td>
+                    <td class="valueTableHead">{{estudiante.documento}}</td>
+                </tr>
+                <tr>
+                    <td class="keyTableHead">EDAD:</td>
+                    <td class="valueTableHead">{{estudiante.edad}}</td>
+                </tr>
+                <tr>
+                    <td class="keyTableHead">DIAGNOSTICO:</td>
+                    <td class="valueTableHead">{{estudiante.diagnostico}}</td>
+                </tr>
+                <tr>
+                    <td class="keyTableHead">FECHA:</td>
+                    <td class="valueTableHead">2024-09-01 - 2024-11-01</td>
+                </tr>
+            </table>
+            <img src={{estudiante.imagen}} alt="Foto del participante" class="fotoEstudiante">
+        </div>
+
+        <p class="textObserv">{{tematica}}</p>
+
+    </div>
+
+    <p class="textLogros">Abreviaciones: L.A Logro Alcanzado - L.P Logro en Proceso - L.N: Logro No Alcanzado</p>
+
+    <div class="containerTable">
+
+        <div class="textAvances" style="text-align: center;">AVANCES TERAPÉUTICOS Y PEDAGÓGICOS</div>
+
+        <table class="tableData">
+            <!--recorrer el objeto que contiene los arrays de los datos-->
+            {% for area, data in combinados %}
+            <thead class="tableDataHead">
+                <tr>
+                    <th>{{area}}</th>
+                    <th class="headResult">L.A</th>
+                    <th class="headResult">L.P</th>
+                    <th class="headResult">L.N</th>
+                </tr>
+            </thead>
+            <!--ACCEDEMOS PUNTUALMENTE A CADA DATOS CON RESPECTO A UN AREA-->
+            <tbody class="tableDataBody">
+                {% for values in data %}
+                <tr>
+                    <td>{{values.logro}}</td>
+                    <!--LOGRO APROBADO-->
+                    <td class="dataBodyResult">
+                        {% if values.resultado == "1" %}
+                        X
+                        {% else %}
+
+                        {% endif %}
+                    </td>
+                    <!--LOGRO EN PROCESO-->
+                    <td class="dataBodyResult">
+                        {% if values.resultado == "2" %}
+                        X
+                        {% else %}
+
+                        {% endif %}
+                    </td>
+                    <!--LOGRO NO ARPOBADO-->
+                    <td class="dataBodyResult">
+                        {% if values.resultado == "0" %}
+                        X
+                        {% else %}
+
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endfor %}
+        </table>
+
+        <table class="tableObservaciones">
+            <tr>
+                <td class="observacionTittle">OBSERVACIONES</td>
+            </tr>
+            <tr>
+                <td class="observacionText">{{observacion}}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
